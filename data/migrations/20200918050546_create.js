@@ -1,21 +1,25 @@
 exports.up = async function (knex) {
   await knex.schema.createTable('owners', tbl => {
     tbl.increments('id');
+    tbl.string('username', 128).notNull().unique();
+    tbl.string('password', 128).notNull();
     tbl.string('fullName', 128).notNull().unique();
-    tbl.string('address', 128);
-    tbl.string('city', 50);
-    tbl.string('state', 50);
-    tbl.string('email', 128);
+    tbl.string('email', 128).notNull();
+    tbl.string('address', 128).notNull();
+    tbl.string('city', 50).notNull();
+    tbl.string('state', 50).notNull();
     tbl.boolean('owner').defaultTo(true);
   });
 
   await knex.schema.createTable('renters', tbl => {
     tbl.increments('id');
+    tbl.string('username', 128).notNull().unique();
+    tbl.string('password', 128).notNull();
     tbl.string('fullName', 128).notNull().unique();
+    tbl.string('email', 128).notNull();
     tbl.string('address', 128).notNull();
     tbl.string('city', 50).notNull();
     tbl.string('state', 50).notNull();
-    tbl.string('email', 128).notNull();
     tbl.boolean('owner').defaultTo(false);
   });
 
