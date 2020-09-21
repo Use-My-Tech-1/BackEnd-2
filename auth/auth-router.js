@@ -80,6 +80,7 @@ router.post('/login', async (req, res, next) => {
 
     res.json({
       message: `Welcome ${user.username}!`,
+      owner: user.owner,
       token
     });
   } catch (err) {

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authError = {
-  message: 'You are not permitted here'
+  message: 'You do not have access to this route'
 };
 
 module.exports = async (req, res, next) => {
