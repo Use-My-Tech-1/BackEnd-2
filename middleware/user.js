@@ -1,9 +1,9 @@
 const Users = require('../renters/renters-model');
 
-function validateUserId() {
+function validateTokenId() {
   return async (req, res, next) => {
     try {
-      const user = await Users.findById(req.params.id);
+      const user = await Users.findById(req.token.id);
       if (user) {
         req.user = user;
 
@@ -17,13 +17,9 @@ function validateUserId() {
   };
 }
 
-function validateUserData() {
+function validateRegister() {
   return (req, res, next) => {
-    if (Object.keys(req.body).length === 0) {
-      res.status(400).json({ msg: 'Missing user data' });
-    } else if (!req.body.username) {
-      res.status(400).json({ msg: 'Missing required username field' });
-    } else if (!req.body.email) {
+    if (!req.body.email) {
       res.status(400).json({ msg: 'Missing required email field' });
     } else if (!req.body.owner) {
       res.status(400).json({ msg: 'Missing required owner field' });
@@ -33,4 +29,31 @@ function validateUserData() {
   };
 }
 
-module.exports = { validateUserId, validateUserData };
+function validateLogin() {
+  return (req, res, next) => {
+    if (!req.body.username || !req.body.password) {
+      res
+        .status(400)
+        .json({ message: 'Username & password fields are required' });
+    } else {
+      next();
+    }
+  };
+}
+
+function validatePost() {
+  return (req, res, next) => {
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: 'Missing required data' });
+    }
+
+    next();
+  };
+}
+
+module.exports = {
+  validateTokenId,
+  validateRegister,
+  validateLogin,
+  validatePost
+};

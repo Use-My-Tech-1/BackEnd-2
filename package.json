@@ -8,6 +8,9 @@
     "server": "nodemon cross-env DB_ENV=development index",
     "test": "cross-env DB_ENV=testing jest --watch"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Use-My-Tech-1/BackEnd-2.git"

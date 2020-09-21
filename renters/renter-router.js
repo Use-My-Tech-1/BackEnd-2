@@ -1,15 +1,26 @@
 const express = require('express');
 const Renters = require('./renters-model');
-const { validateUserId } = require('../middleware/user');
+const { validateTokenId } = require('../middleware/user');
 
 const router = express.Router();
 
-// @desc    Get rented items
-// @route   GET /api/renter/:id/items
+// @desc    Get renter
+// @route   GET /api/renter
 // @access  Private
-router.get('/:id/items', validateUserId(), async (req, res, next) => {
+router.get('/', validateTokenId(), (req, res, next) => {
   try {
-    const items = await Renters.getRentedItems(req.params.id);
+    res.json({ data: req.user });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// @desc    Get rented items
+// @route   GET /api/renter/items
+// @access  Private
+router.get('/items', validateTokenId(), async (req, res, next) => {
+  try {
+    const items = await Renters.getRentedItems(req.user.id);
 
     if (items.length === 0) {
       return res.json({
@@ -24,9 +35,9 @@ router.get('/:id/items', validateUserId(), async (req, res, next) => {
 });
 
 // @desc    Add rented item to list
-// @route   POST /api/renter/item/:id
+// @route   POST /api/renter/items/:id
 // @access  Private
-router.post('/item/:id', validateUserId(), async (req, res, next) => {
+router.post('/items/:id', validateTokenId(), async (req, res, next) => {
   try {
     const item = await Renters.isItemAvailable(req.params.id);
 
@@ -35,7 +46,7 @@ router.post('/item/:id', validateUserId(), async (req, res, next) => {
         message: 'Item is not longer available for rent'
       });
     }
-    const newItem = await Renters.addRentedItem(req.token.id, req.params.id);
+    const newItem = await Renters.addRentedItem(req.user.id, req.params.id);
 
     res.json(newItem);
   } catch (err) {
