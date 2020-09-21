@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const error = require('./middleware/error');
 const colors = require('colors');
 
+const renterAuth = require('./middleware/renterAuth');
 const itemRouter = require('./items/item-router');
 const authRouter = require('./auth/auth-router.js');
 const renterRouter = require('./renters/renter-router');
@@ -22,7 +23,7 @@ server.get('/', (req, res) => {
 });
 server.use('/api/items', itemRouter);
 server.use('/api/auth', authRouter);
-server.use('/api/renter', renterRouter);
+server.use('/api/renter', renterAuth, renterRouter);
 
 server.use(error);
 

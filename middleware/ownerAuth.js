@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authError = {
-  message: 'You are not permitted'
+  message: 'You are not permitted here'
 };
 
 module.exports = async (req, res, next) => {
@@ -18,6 +18,10 @@ module.exports = async (req, res, next) => {
       }
 
       req.token = decoded;
+
+      if (decoded.owner === 0) {
+        return res.status(401).json(authError);
+      }
 
       next();
     });

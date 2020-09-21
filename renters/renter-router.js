@@ -23,4 +23,8 @@ router.get('/:id/items', validateUserId(), async (req, res, next) => {
   }
 });
 
+// @desc    Add rented item
+// @route   POST /api/renter/:id/items
+// @access  Private
+
 module.exports = router;

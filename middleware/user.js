@@ -17,4 +17,20 @@ function validateUserId() {
   };
 }
 
-module.exports = { validateUserId };
+function validateUserData() {
+  return (req, res, next) => {
+    if (Object.keys(req.body).length === 0) {
+      res.status(400).json({ msg: 'Missing user data' });
+    } else if (!req.body.username) {
+      res.status(400).json({ msg: 'Missing required username field' });
+    } else if (!req.body.email) {
+      res.status(400).json({ msg: 'Missing required email field' });
+    } else if (!req.body.owner) {
+      res.status(400).json({ msg: 'Missing required owner field' });
+    }
+
+    next();
+  };
+}
+
+module.exports = { validateUserId, validateUserData };

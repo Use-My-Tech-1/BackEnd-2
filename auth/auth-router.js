@@ -2,13 +2,23 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('./auth-model');
+const { validateUserData } = require('../middleware/user');
 
 // @desc    Create user
 // @route   POST /api/auth/register
 // @access  Public
-router.post('/register', async (req, res, next) => {
+router.post('/register', validateUserData(), async (req, res, next) => {
   try {
-    const { username, password, email, owner } = req.body;
+    const {
+      username,
+      password,
+      email,
+      owner,
+      fullName,
+      address,
+      city,
+      state
+    } = req.body;
     const user = await Users.findUser({ username }).first();
 
     if (user) {
@@ -24,7 +34,11 @@ router.post('/register', async (req, res, next) => {
         parseInt(process.env.TIME_COMPLEXITY)
       ),
       email,
-      owner
+      owner,
+      fullName,
+      address,
+      city,
+      state
     });
 
     res.status(201).json(newUser);
