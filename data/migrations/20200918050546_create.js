@@ -1,5 +1,5 @@
 exports.up = async function (knex) {
-  await knex.schema.createTable('owners', tbl => {
+  await knex.schema.createTable('users', tbl => {
     tbl.increments('id');
     tbl.string('username', 128).notNull().unique();
     tbl.string('password', 128).notNull();
@@ -9,18 +9,6 @@ exports.up = async function (knex) {
     tbl.string('city', 50);
     tbl.string('state', 50);
     tbl.boolean('owner').defaultTo(true);
-  });
-
-  await knex.schema.createTable('renters', tbl => {
-    tbl.increments('id');
-    tbl.string('username', 128).notNull().unique();
-    tbl.string('password', 128).notNull();
-    tbl.string('email', 128).notNull();
-    tbl.string('fullName', 128);
-    tbl.string('address', 128);
-    tbl.string('city', 50);
-    tbl.string('state', 50);
-    tbl.boolean('owner').defaultTo(false);
   });
 
   await knex.schema.createTable('items', tbl => {
@@ -34,7 +22,7 @@ exports.up = async function (knex) {
     tbl
       .integer('owner_id')
       .references('id')
-      .inTable('owners')
+      .inTable('users')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
   });
@@ -44,7 +32,7 @@ exports.up = async function (knex) {
       .integer('renter_id')
       .notNull()
       .references('id')
-      .inTable('renters')
+      .inTable('users')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
     tbl
@@ -61,6 +49,5 @@ exports.up = async function (knex) {
 exports.down = async function (knex) {
   await knex.schema.dropTableIfExists('renter_items');
   await knex.schema.dropTableIfExists('items');
-  await knex.schema.dropTableIfExists('renters');
-  await knex.schema.dropTableIfExists('owners');
+  await knex.schema.dropTableIfExists('users');
 };
