@@ -5,7 +5,7 @@ function getItem(id) {
 }
 
 function getItems(owner_id) {
-  return db('items').where({ owner_id });
+  return db('items').where({ owner_id }).orderBy('id');
 }
 
 function add(newItem) {

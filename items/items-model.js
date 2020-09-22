@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig');
 
 function find() {
-  return db('items');
+  return db('items').orderBy('id');
 }
 
 function findById(id) {
