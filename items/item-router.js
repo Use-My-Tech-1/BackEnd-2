@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
   try {
     const items = await Items.find();
 
-    res.json({ count: items.length, data: items });
+    res.json(items);
   } catch (err) {
     next(err);
   }
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res, next) => {
       });
     }
 
-    res.json({ data: item });
+    res.json(item);
   } catch (err) {
     next(err);
   }

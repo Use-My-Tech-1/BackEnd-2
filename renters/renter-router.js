@@ -9,7 +9,7 @@ const router = express.Router();
 // @access  Private
 router.get('/', validateUserId(), (req, res, next) => {
   try {
-    res.json({ data: req.user });
+    res.json(req.user);
   } catch (err) {
     next(err);
   }
@@ -28,7 +28,7 @@ router.get('/items', validateUserId(), async (req, res, next) => {
       });
     }
 
-    res.json({ data: items });
+    res.json(items);
   } catch (err) {
     next(err);
   }

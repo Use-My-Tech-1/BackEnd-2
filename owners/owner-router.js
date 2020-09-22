@@ -10,7 +10,7 @@ const router = express.Router();
 // @access  Private
 router.get('/', validateUserId(), (req, res, next) => {
   try {
-    res.json({ data: req.user });
+    res.json(req.user);
   } catch (err) {
     next(err);
   }
@@ -29,7 +29,7 @@ router.get('/items', validateUserId(), async (req, res, next) => {
       });
     }
 
-    res.json({ data: itemList });
+    res.json(itemList);
   } catch (err) {
     next(err);
   }
@@ -43,7 +43,7 @@ router.get(
   validateItemId(),
   async (req, res, next) => {
     try {
-      res.status(200).json({ data: req.item });
+      res.status(200).json(req.item);
     } catch (err) {
       next(err);
     }
@@ -70,7 +70,7 @@ router.post(
         owner_id: req.user.id
       });
 
-      res.status(201).json({ data: newItem });
+      res.status(201).json(newItem);
     } catch (err) {
       next(err);
     }
