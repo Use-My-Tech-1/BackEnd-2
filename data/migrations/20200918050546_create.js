@@ -8,7 +8,7 @@ exports.up = async function (knex) {
     tbl.string('address', 128);
     tbl.string('city', 50);
     tbl.string('state', 50);
-    tbl.boolean('owner').defaultTo(true);
+    tbl.boolean('owner').defaultTo(false);
   });
 
   await knex.schema.createTable('items', tbl => {

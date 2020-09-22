@@ -37,26 +37,21 @@ router.get('/items', validateUserId(), async (req, res, next) => {
 // @desc    Add rented item to list
 // @route   POST /api/renter/items/:id
 // @access  Private
-router.post(
-  '/items/:id',
-  validatePost(),
-  validateUserId(),
-  async (req, res, next) => {
-    try {
-      const item = await Renters.isItemAvailable(req.params.id);
+router.post('/items/:id', validateUserId(), async (req, res, next) => {
+  try {
+    const item = await Renters.isItemAvailable(req.params.id);
 
-      if (item.available === 0 || false) {
-        return res.status(409).json({
-          message: 'Item is not longer available for rent'
-        });
-      }
-      const newItem = await Renters.addRentedItem(req.user.id, req.params.id);
-
-      res.json(newItem);
-    } catch (err) {
-      next(err);
+    if (item.available === 0 || false) {
+      return res.status(409).json({
+        message: 'Item is not longer available for rent'
+      });
     }
+    const newItem = await Renters.addRentedItem(req.user.id, req.params.id);
+
+    res.json(newItem);
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 module.exports = router;

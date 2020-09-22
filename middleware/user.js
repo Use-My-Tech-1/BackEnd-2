@@ -20,19 +20,21 @@ function validateUserId() {
 
 function validateRegister() {
   return (req, res, next) => {
-    if (!req.body.email) {
-      return res.status(400).json({ msg: 'Missing required email field' });
-    } else if (!req.body.owner) {
-      return res.status(400).json({ msg: 'Missing required owner field' });
-    }
+    const { username, password, email } = req.body;
 
-    next();
+    if (!username || !password || !email) {
+      res.status(400).json({ message: 'Missing required fields' });
+    } else {
+      next();
+    }
   };
 }
 
 function validateLogin() {
   return (req, res, next) => {
-    if (!req.body.username || !req.body.password) {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
       res
         .status(400)
         .json({ message: 'Username & password fields are required' });

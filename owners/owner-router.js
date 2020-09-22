@@ -37,21 +37,18 @@ router.get('/items', validateUserId(), async (req, res, next) => {
 // @desc    Get single item
 // @route   GET /api/owner/items/:id
 // @access  Private
-router.get('/items/:id', validateUserId(), async (req, res, next) => {
-  try {
-    const item = await Owners.getItem(req.params.id);
-
-    if (!item) {
-      return res.status(404).json({
-        message: 'You have no items for rent'
-      });
+router.get(
+  '/items/:id',
+  validateUserId(),
+  validateItemId(),
+  async (req, res, next) => {
+    try {
+      res.status(200).json({ data: req.item });
+    } catch (err) {
+      next(err);
     }
-
-    res.status(200).json({ data: item });
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 // @desc    Add item
 // @route   POST /api/owner/items

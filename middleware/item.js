@@ -2,21 +2,13 @@ const Items = require('../items/items-model');
 
 function validateItemData() {
   return (req, res, next) => {
-    if (!req.body.itemName) {
-      return res.status(400).json({ msg: 'Missing required item name field' });
-    } else if (!req.body.price) {
-      return res.status(400).json({ msg: 'Missing required price field' });
-    } else if (!req.body.description) {
-      return res
-        .status(400)
-        .json({ msg: 'Missing required description field' });
-    } else if (!req.body.rentalTerm) {
-      return res
-        .status(400)
-        .json({ msg: 'Missing required rental term field' });
-    }
+    const { itemName, price, description, rentalTerm } = req.body;
 
-    next();
+    if (!itemName || !price || !description || !rentalTerm) {
+      res.status(400).json({ message: 'Missing required fields' });
+    } else {
+      next();
+    }
   };
 }
 
