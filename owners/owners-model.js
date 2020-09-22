@@ -10,7 +10,7 @@ function getItems(owner_id) {
 
 function add(newItem) {
   return db('items')
-    .insert(newItem)
+    .insert(newItem, 'id')
     .then(ids => {
       return getItem(ids[0]);
     });
