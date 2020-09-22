@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig.js');
 
-function findById(id) {
-  return db('users').where({ id }).first();
+function getItem(id) {
+  return db('items').where({ id }).first();
 }
 
 function getItems(owner_id) {
@@ -12,7 +12,7 @@ function add(newItem) {
   return db('items')
     .insert(newItem)
     .then(ids => {
-      return findById(ids[0]);
+      return getItem(ids[0]);
     });
 }
 
@@ -25,8 +25,8 @@ function remove(id) {
 }
 
 module.exports = {
+  getItem,
   getItems,
-  findById,
   add,
   update,
   remove

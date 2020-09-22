@@ -1,6 +1,7 @@
 const Users = require('../renters/renters-model');
 
-function validateTokenId() {
+// Validate user id from token id on request object
+function validateUserId() {
   return async (req, res, next) => {
     try {
       const user = await Users.findById(req.token.id);
@@ -20,9 +21,9 @@ function validateTokenId() {
 function validateRegister() {
   return (req, res, next) => {
     if (!req.body.email) {
-      res.status(400).json({ msg: 'Missing required email field' });
+      return res.status(400).json({ msg: 'Missing required email field' });
     } else if (!req.body.owner) {
-      res.status(400).json({ msg: 'Missing required owner field' });
+      return res.status(400).json({ msg: 'Missing required owner field' });
     }
 
     next();
@@ -52,7 +53,7 @@ function validatePost() {
 }
 
 module.exports = {
-  validateTokenId,
+  validateUserId,
   validateRegister,
   validateLogin,
   validatePost
