@@ -6,21 +6,21 @@
 
 \*_Method column includes anchor links_
 
-| Method                             | Endpoint                | Required                                                                  | Description                                                            |
-| ---------------------------------- | ----------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [POST](#renter-owner-registration) | `/api/auth/register`    | `username`, `password`, `email`, `owner`                                  | Create new renter / owner. Owner is a boolean that defaults to false.  |
-| [POST](#renter-owner-login)        | `/api/auth/login`       | `username`, `password`                                                    | Logs user in. Returns token and owner boolean.                         |
-| [GET](#get-all-items)              | `/api/items`            | No requirements                                                           | Shows all items in database.                                           |
-| [GET](#get-single-item)            | `/api/items/:id`        | Item id                                                                   | Shows single item from database.                                       |
-| [GET](#get-renter)                 | `/api/renter`           | Valid token                                                               | Shows renter user profile.                                             |
-| [GET](#get-rented-items)           | `/api/renter/items`     | Valid token                                                               | Shows rented items for user.                                           |
-| [POST](#add-item-to-list)          | `/api/renter/items/:id` | Valid token                                                               | Adds item to renters account, makes item unavailable. No request body. |
-| [GET](#get-owner)                  | `/api/owner`            | Valid token                                                               | Gets owner user profile.                                               |
-| [GET](#get-owner-items)            | `/api/owner/items`      | Valid token                                                               | Gets all owner added items.                                            |
-| [GET](#get-owner-item)             | `api/owner/items/:id`   | Valid token, item id                                                      | Gets single item for owner.                                            |
-| [POST](#add-item)                  | `/api/owner/items`      | Valid token, `itemName`, `price`, `description`, `rentalTerm`, `imageUrl` | Adds item for rent.                                                    |
-| [PUT](#update-item)                | `/api/owner/items/:id`  | Valid token, item id, at least 1 item property                            | Updates owner item.                                                    |
-| [DELETE](#delete-item)             | `/api/owner/items/:id`  | Valid token, item id                                                      | Deletes item from database.                                            |
+| Method                              | Endpoint                | Required                                                                  | Description                                                            |
+| ----------------------------------- | ----------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [POST](#renter--owner-registration) | `/api/auth/register`    | `username`, `password`, `email`, `owner`                                  | Create new renter / owner. Owner is a boolean that defaults to false.  |
+| [POST](#renter--owner-login)        | `/api/auth/login`       | `username`, `password`                                                    | Logs user in. Returns token and owner boolean.                         |
+| [GET](#get-all-items)               | `/api/items`            | No requirements                                                           | Shows all items in database.                                           |
+| [GET](#get-single-item)             | `/api/items/:id`        | Item id                                                                   | Shows single item from database.                                       |
+| [GET](#get-renter)                  | `/api/renter`           | Valid token                                                               | Shows renter user profile.                                             |
+| [GET](#get-rented-items)            | `/api/renter/items`     | Valid token                                                               | Shows rented items for user.                                           |
+| [POST](#add-item-to-list)           | `/api/renter/items/:id` | Valid token                                                               | Adds item to renters account, makes item unavailable. No request body. |
+| [GET](#get-owner)                   | `/api/owner`            | Valid token                                                               | Gets owner user profile.                                               |
+| [GET](#get-owner-items)             | `/api/owner/items`      | Valid token                                                               | Gets all owner added items.                                            |
+| [GET](#get-owner-item)              | `api/owner/items/:id`   | Valid token, item id                                                      | Gets single item for owner.                                            |
+| [POST](#add-item)                   | `/api/owner/items`      | Valid token, `itemName`, `price`, `description`, `rentalTerm`, `imageUrl` | Adds item for rent.                                                    |
+| [PUT](#update-item)                 | `/api/owner/items/:id`  | Valid token, item id, at least 1 item property                            | Updates owner item.                                                    |
+| [DELETE](#delete-item)              | `/api/owner/items/:id`  | Valid token, item id                                                      | Deletes item from database.                                            |
 
 ---
 
