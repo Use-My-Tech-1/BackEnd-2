@@ -14,8 +14,7 @@ module.exports = {
     connection: { filename: './data/use_tech.db3' },
     useNullAsDefault: true,
     migrations: {
-      directory: './data/migrations',
-      tableName: 'dbmigrations'
+      directory: './data/migrations'
     },
     seeds: { directory: './data/seeds' },
     pool: {
@@ -30,8 +29,7 @@ module.exports = {
     connection: { filename: './data/testdb.db3' },
     useNullAsDefault: true,
     migrations: {
-      directory: './data/migrations',
-      tableName: 'dbmigrations'
+      directory: './data/migrations'
     },
     seeds: { directory: './data/seeds' },
     pool: {

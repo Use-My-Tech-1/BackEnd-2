@@ -13,17 +13,14 @@ const OwnerLoginCreds = {
   password: 'password'
 };
 
-beforeAll(async () => {
-  // run seeds before tests
-  await db.truncate('users');
-});
-
 afterAll(async () => {
+  // Clean up mess by running seeds
+  await db.seed.run();
   // Close database after tests to prevent warning
   await db.destroy();
 });
 
-describe('owners integration tests', () => {
+describe('auth integration tests', () => {
   it('POST /api/auth/register', async () => {
     const res = await supertest(server)
       .post('/api/auth/register')
